@@ -1,103 +1,48 @@
 <!DOCTYPE html>
-<html>
- <head>
-    <title>Padmasri Discount Calculations</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" 
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" 
-    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" 
-    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name Discount Calculations</title>
+    <script>
+        function discount() {
+            // Get input values
+            var price = document.getElementById('price').value;
+            var count = document.getElementById('count').value;
+            var reductions = document.getElementById('reductions').value;
 
- </head>
+            // Initialize output
+            var myOutput = "";
+
+            // Loop for 5 iterations
+            for (var i = 0; i < 5; i++) {
+                // Calculate total value with discount
+                var discountPercentage = parseInt(reductions) + i;
+                var totalPrice = price * count;
+                var discountAmount = (discountPercentage / 100) * totalPrice;
+                var discountedPrice = totalPrice - discountAmount;
+
+                // Append to output
+                myOutput += discountPercentage + "% is calculated cost: $" + discountedPrice.toFixed(2) + "; ";
+            }
+
+            // Update the result
+            document.getElementById('result').innerText = "Totals are: " + myOutput;
+        }
+    </script>
+</head>
 <body>
-    <div class="form-group">
-<h2>Padmasri Discount Calculations</h2>
-<label for="price">Enter price per:</label>
-<input type="number" id="price" value="10" class="form-control"><br>
+    <label for="price">Enter price per:</label>
+    <input type="number" id="price" value="10"><br><br>
 
-<label for="count">Enter the number of items:</label>
-<input type="number" id="count" value="9" class="form-control"><br>
+    <label for="count">Enter the number of items:</label>
+    <input type="number" id="count" value="9"><br><br>
 
-<label for="reductions">Enter the discount percent:</label>
-<input type="number" id="reductions" value="5" class="form-control"><br>
-<button onclick="discount()" class="btn btn-primary">Show total</button>
-</div>
-<div id="results"></div>
-<div class="form-group">
-<form>
-    <label><input type="radio" name="operation" value="sum" onclick="chooseOp()" >Sum</label><br>
-    <label><input type="radio" name="operation" value="multiply" onclick="chooseOp()">Multiply</label><br>
-    <label><input type="radio" name="operation" value="exponent" onclick="chooseOp()">Exponent</label><br>
-  </form></div>
+    <label for="reductions">Enter the discount percent:</label>
+    <input type="number" id="reductions" value="5"><br><br>
 
-<form>
-    <label for="form1_age">What is your age </label>
-    <input type ="number" class="form-control" id="form1_age" name="form1_age" min=10 max=50 step=2 value=30> <br>
+    <button onclick="discount()">Show total</button>
 
-    <label for="form1_nick">What is your nickname </label>
-    <input type ="text" class="form-control" id="form1_nick" name="form1_nick" autofocus> <br>
-
-    <input type="button" class="btn btn-primary" onclick="resolveForm()" value="Get values from form">
-</form>
-
-
-<p id="result">This text will be replaced </p>
-
-<script> 
-function discount() {
-    let price = parseFloat(document.getElementById('price').value);
-    let count = parseInt(document.getElementById('count').value);
-    let discount = parseFloat(document.getElementById('reductions').value);
-    let toShow = 'Totals are: ';
-
-    for (let i = 0; i < 5; i++) {
-      let discountPercent = discount + i;
-      let calculatedCost = (price * count * (100 - discountPercent)) / 100;
-      toShow += `${discountPercent}% is ${calculatedCost.toFixed(1)}; `;
-    }
-
-    document.getElementById('results').innerHTML = toShow;
-  }
-
-  function chooseOp() {
-    let price = parseFloat(document.getElementById('price').value);
-    let discount = parseFloat(document.getElementById('reductions').value);
-    let selectedOp = document.querySelector('input[name="operation"]:checked').value;
-
-    let result;
-    switch (selectedOp) {
-      case 'sum':
-        result = price + discount;
-        document.getElementById('results').innerHTML = `Sum of ${price} and ${discount} is ${result}`;
-        break;
-      case 'multiply':
-        result = price * discount;
-        document.getElementById('results').innerHTML = `Product of ${price} and ${discount} is ${result}`;
-        break;
-      case 'exponent':
-        result = Math.pow(price, discount);
-        document.getElementById('results').innerHTML = `Exponent of ${price} to the power of ${discount} is ${result}`;
-        break;
-      default:
-        break;
-    }
-  }
-
-  function resolveForm (){
-    console.log("Getting form values")
-    age = document.getElementById("form1_age").value
-    nick = document.getElementById("form1_nick").value
-    confirmed = confirm("Are these the values? "+age+" and "+nick)
-    
-    out = document.getElementById("result")
-    if(confirmed){
-        out.innerHTML = "Values were confirmed"
-    } else {
-        out.innerHTML = "Values were not confirmed"
-    }
-}
-</script>
-
+    <div id="result"></div>
 </body>
-</html> 
+</html>
